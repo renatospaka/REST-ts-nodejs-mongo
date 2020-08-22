@@ -1,8 +1,8 @@
-##cria a imagem
+##vcria a imagem
 docker build -t renatospaka/api-ts .
 
-##executa e nomeia o contêiner
+##vexecuta e nomeia o contêiner
 docker run -d -p 5000:3050 --name api-ts renatospaka/api-ts
 
-##sobre o docker compose
+##vsobre o docker compose
 docker-compose up
