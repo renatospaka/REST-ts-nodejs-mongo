@@ -1,9 +1,9 @@
 version: "3"
 services:
   api:
-    build: .
+    image: tadrianonet/api-ts
     ports:
-      - "5000:3050"
+      - "80:3050"
     links:
       - link-db
   link-db:
