@@ -1,7 +1,7 @@
 version: "3"
 services:
   api:
-    image: tadrianonet/api-ts
+    image: renatospaka/api-ts
     ports:
       - "80:3050"
     links:
