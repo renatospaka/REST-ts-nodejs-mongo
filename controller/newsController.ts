@@ -6,7 +6,7 @@ import Helper from "../infra/helper";
 
 class NewsController {
   async get(req, res) {
-    let client = redis.createClient();
+    let client = redis.createClient(6379, 'redis');
     client.get("news", function (err, reply) {
       if (reply) {
         console.log('redis');
