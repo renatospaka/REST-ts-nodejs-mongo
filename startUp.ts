@@ -51,7 +51,7 @@ class StartUp {
     });
 
     //valida a autorização de acesso às rotas
-    this.app.use(Auth.validate);
+    //this.app.use(Auth.validate);
 
     //rotas do CRUD
     this.app.route("/api/v1/news").get(NewsController.get);

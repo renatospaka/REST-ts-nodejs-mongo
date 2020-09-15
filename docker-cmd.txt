@@ -1,8 +1,20 @@
-##vcria a imagem
+## cria a imagem
 docker build -t renatospaka/api-ts .
 
-##vexecuta e nomeia o contêiner
+## executa e nomeia o contêiner
 docker run -d -p 5000:3050 --name api-ts renatospaka/api-ts
 
-##vsobre o docker compose
+## sobre o docker compose
 docker-compose up
+
+## cria um contêiner para o redis
+docker run -d -p 6379:6379 --name redis-portalnews redis 
+
+## consulta o banco redis
+docker exec -it 36b21de03332 /bin/sh
+redis-cli
+get news
+
+docker exec -it <redis docker id> /bin/sh
+redis-cli
+get news <nome do db redis>
