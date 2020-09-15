@@ -13,7 +13,9 @@ class Auth {
               message: "403 - Invalid token."
             });
         } else {
+          
           next(); 
+          
         }
       });
     } else {

@@ -5,6 +5,8 @@ import Database from "./infra/db";
 import NewsController from "./controller/newsController";
 import Auth from "./infra/auth";
 
+import uploads from "./infra/uploads";
+
 class StartUp {
   public app: express.Application;
   private _db: Database;
@@ -39,9 +41,19 @@ class StartUp {
       res.send({ versao: "0.0.1"})
     });
 
-    //valida a autorização de acesso às rotas
-    this.app.use(Auth.validate);
+    //rota de upload de arquivo
+    this.app.route("/uploads").post(uploads.single("file"), (req, res, next) => {
+      try {
+        res.send("Arquivo enviado com sucesso!");
+      } catch (error) {
+        console.log(error);
+      };
+    });
 
+    //valida a autorização de acesso às rotas
+    //this.app.use(Auth.validate);
+
+    //rotas do CRUD
     this.app.route("/api/v1/news").get(NewsController.get);
     this.app.route("/api/v1/news/:id").get(NewsController.getById);
     this.app.route("/api/v1/news").post(NewsController.create);
