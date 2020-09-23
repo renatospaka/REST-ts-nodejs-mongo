@@ -2,10 +2,11 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from 'cors';
 import Database from "./infra/db";
-import NewsController from "./controller/newsController";
 import Auth from "./infra/auth";
+import * as compression from 'compression';
 
 import uploads from "./infra/uploads";
+import newsRouter from "./routes/newsRouter";
 
 class StartUp {
   public app: express.Application;
@@ -34,6 +35,7 @@ class StartUp {
     this.enableCors();
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(compression());
   }
 
   routes() {
@@ -53,12 +55,8 @@ class StartUp {
     //valida a autorização de acesso às rotas
     //this.app.use(Auth.validate);
 
-    //rotas do CRUD
-    this.app.route("/api/v1/news").get(NewsController.get);
-    this.app.route("/api/v1/news/:id").get(NewsController.getById);
-    this.app.route("/api/v1/news").post(NewsController.create);
-    this.app.route("/api/v1/news/:id").put(NewsController.update);
-    this.app.route("/api/v1/news/:id").delete(NewsController.delete);
+    //acessa as rotas definidas para news
+    this.app.use('/', newsRouter)
   }
 }
 
