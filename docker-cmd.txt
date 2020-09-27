@@ -1,14 +1,29 @@
 ## cria a imagem
 docker build -t renatospaka/api-ts .
 
-## executa e nomeia o contêiner
+## cria o contêiner para a aplicação
 docker run -d -p 5000:3050 --name api-ts renatospaka/api-ts
+
+## inicia o contêiner da aplicação, se já estiver criado
+docker start api-ts 
+
+## cria o contêiner para o mongo
+docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no --name mongo-api-ts tutum/mongodb
+
+## inicia o contêiner do mongo, se já estiver criado
+docker start mongo-api-ts
+
+## cria o contêiner para o redis
+docker run -d -p 6379:6379 --name redis-api-ts redis 
+
+## inicia o contêiner do redis, se já estiver criado
+docker start redis-api-ts
+
+## publicar no docker hub
+docker image push  renatospaka/api-ts:latest
 
 ## sobre o docker compose
 docker-compose up
-
-## cria um contêiner para o redis
-docker run -d -p 6379:6379 --name redis-portalnews redis 
 
 ## consulta o banco redis
 docker exec -it 36b21de03332 /bin/sh
